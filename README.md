@@ -17,10 +17,9 @@ int fn(void);
 Function object shall return the required number of values (__sz__).
 
 ## Example Usage
-Create a functional_streambuf
+Create a functional_streambuf to emit 32 alternating 'AB' characters and print the stream.
 ```cpp
-  // A functional_streambuf emitting 32 alternating 'AB' characters.
   functional_streambuf fsbuf {count, [](){static int a {1}; a = !a; return 'A'+ a;}};
-  istream is {&fsbuf};
-  cout << is.rdbuf() << endl;
+  std::istream is {&fsbuf};
+  std::cout << is.rdbuf() << std::endl;
 ```
