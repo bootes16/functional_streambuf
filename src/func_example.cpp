@@ -1,7 +1,8 @@
 //
-// Simple main function illustrating use of the simple PRNG.
+// Example illustrating use of the functional_streambuf class.
+// Instantiate the functional_streambuf with a function returning random
+// characters in the range A-Z.
 //
-// Author: Greg Johnson
 // Github: bootes16
 //
 #include <iostream>
@@ -17,17 +18,14 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    auto count = atoi(argv[1]);
+    size_t count = atoi(argv[1]);
 
+    // Create the RNG for ASCII 'A' - 'Z'.
     random_device rd;
-    uniform_int_distribution<> d{64,90};
+    uniform_int_distribution<> d{'A','Z'};
 
-    functional_streambuf sbuf {static_cast<size_t>(count), [&rd, &d](){ return d(rd); }};
-    istream is {&sbuf};
-    char c;
-    cout << hex;
-    while (is.get(c)) {
-        cout << (int)c;
-    }
-    cout << endl;
+    // Create functional_streambuf instance and istream of maximum length.
+    functional_streambuf fsbuf {count, [&rd, &d](){ return d(rd); }};
+    istream is {&fsbuf};
+    cout << is.rdbuf() << endl;
 }

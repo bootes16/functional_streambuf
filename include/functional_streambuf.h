@@ -4,6 +4,8 @@
 // Stream buffer which takes a nullary function object as a character data source.
 // Will emit up to a fix size stream of chars from the function object.
 //
+// Github: bootes16
+//
 #ifndef FUNCTIONAL_STREAMBUF_H
 #define FUNCTIONAL_STREAMBUF_H
 #include <iostream>
