@@ -9,10 +9,11 @@ Stream buffer class which emits characters acquired from a nullary function obje
 
 ## Parameters
 __sz__ - length of stream (number of characters) emitted.
+
 __fn__ - nullary function object with the following signature:
-> ```cpp
-> int fn(void);
-> ```
+```cpp
+int fn(void);
+```
 Function object shall return the required number of values (__sz__).
 
 ## Example Usage
