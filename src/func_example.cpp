@@ -5,10 +5,9 @@
 // Github: bootes16
 //
 #include <iostream>
-#include <sstream>
+#include <random>
 
-#include "middle_sq_weyl.h"
-#include "random_streambuf.h"
+#include "functional_streambuf.h"
 
 using namespace std;
 
@@ -20,9 +19,11 @@ int main(int argc, char *argv[]) {
 
     auto count = atoi(argv[1]);
 
-    MiddleSqWeyl<char> msw {};
-    random_streambuf rsb {static_cast<size_t>(count), msw};
-    istream is {&rsb};
+    random_device rd;
+    uniform_int_distribution<> d{64,90};
+
+    functional_streambuf sbuf {static_cast<size_t>(count), [&rd, &d](){ return d(rd); }};
+    istream is {&sbuf};
     char c;
     cout << hex;
     while (is.get(c)) {

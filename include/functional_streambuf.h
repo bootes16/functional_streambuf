@@ -15,7 +15,7 @@ public:
     // len      Maximum number of characters the stream buffer will emit.
     // fn       nullary function object which returns an int at a time.
     //
-    functional_streambuf(size_t len, std::function<int()>& fn) : len{len}, cap{len}, fn{fn} {
+    functional_streambuf(size_t len, std::function<int()> fn) : len{len}, cap{len}, fn{fn} {
         ch = fn(); // Prime the holding buffer.
     }
 
